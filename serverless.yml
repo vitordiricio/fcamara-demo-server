@@ -1,0 +1,50 @@
+service: nu-flow
+
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: sa-east-1
+  environment:
+    OPENAI_API_KEY: ${env:OPENAI_API_KEY}
+    APP_USERNAME: ${env:APP_USERNAME}
+    APP_PASSWORD: ${env:APP_PASSWORD}
+    JWT_SECRET: ${env:JWT_SECRET}
+    HUGGING_FACE_TOKEN: ${env:HUGGING_FACE_TOKEN}
+    MY_AWS_ACCESS_KEY_ID: ${env:MY_AWS_ACCESS_KEY_ID}
+    MY_AWS_SECRET_ACCESS_KEY: ${env:MY_AWS_SECRET_ACCESS_KEY}
+    MY_AWS_BUCKET_NAME: ${env:MY_AWS_BUCKET_NAME}
+    MY_AWS_REGION: ${env:MY_AWS_REGION}
+    FAL_KEY: ${env:FAL_KEY}
+
+functions:
+  api:
+    handler: src/server.handler
+    timeout: 300
+    memorySize: 1024
+    events:
+      - http:
+          path: /status
+          method: get
+          cors: true
+      - http:
+          path: /login
+          method: post
+          cors: true
+      - http:
+          path: /get-nuflow-guideline
+          method: get
+          cors: true
+      - http:
+          path: /generate-copy
+          method: post
+          cors: true
+      - http:
+          path: /generate-prompt-image
+          method: post
+          cors: true
+      - http:
+          path: /generate-image
+          method: post
+          cors: true
