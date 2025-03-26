@@ -3,7 +3,6 @@ import { Express } from "express";
 import authRoutes from "./auth.routes";
 import copyGeneratorRoutes from "./copy-generator.routes";
 import imageGeneratorRoutes from "./image-generator.routes";
-import examplesRoutes from "./examples.routes";
 import videoAnalyserRoutes from "./video-analyser.routes";
 
 /**
@@ -16,11 +15,8 @@ export const configureRoutes = (app: Express) => {
   // Copy generator routes
   app.use("/", copyGeneratorRoutes);
 
-  // Image generator routes
+  // Image generator routes (now includes examples)
   app.use("/", imageGeneratorRoutes);
-
-  // Examples routes
-  app.use("/", examplesRoutes);
 
   // Video analyser routes
   app.use("/", videoAnalyserRoutes);

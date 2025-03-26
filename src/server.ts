@@ -4,7 +4,6 @@ import cors from "cors";
 import serverless from "serverless-http";
 import { errorHandler } from "./middleware/error.middleware";
 import { configureRoutes } from "./routes";
-import { CONFIG } from "./config";
 
 // Initialize express app
 const app = express();
