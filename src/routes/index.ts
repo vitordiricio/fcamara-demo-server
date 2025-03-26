@@ -4,6 +4,7 @@ import authRoutes from "./auth.routes";
 import copyGeneratorRoutes from "./copy-generator.routes";
 import imageGeneratorRoutes from "./image-generator.routes";
 import videoAnalyserRoutes from "./video-analyser.routes";
+import emailGeneratorRoutes from "./email-generator.routes";
 
 /**
  * Configure all routes for the application
@@ -20,4 +21,7 @@ export const configureRoutes = (app: Express) => {
 
   // Video analyser routes
   app.use("/", videoAnalyserRoutes);
+
+  // Email generator routes
+  app.use("/", emailGeneratorRoutes);
 };

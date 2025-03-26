@@ -1,4 +1,4 @@
-service: nu-flow
+service: fcamara-demo
 
 useDotenv: true
 
@@ -17,6 +17,7 @@ provider:
     MY_AWS_BUCKET_NAME: ${env:MY_AWS_BUCKET_NAME}
     MY_AWS_REGION: ${env:MY_AWS_REGION}
     FAL_KEY: ${env:FAL_KEY}
+    GEMINI_API_KEY: ${env:GEMINI_API_KEY}
 
 functions:
   api:
@@ -46,5 +47,13 @@ functions:
           cors: true
       - http:
           path: /generate-image
+          method: post
+          cors: true
+      - http:
+          path: /analyse-video
+          method: post
+          cors: true
+      - http:
+          path: /generate-email
           method: post
           cors: true

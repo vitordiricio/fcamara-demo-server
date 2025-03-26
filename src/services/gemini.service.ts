@@ -51,3 +51,43 @@ export const analyzeVideoAndPdf = async (
     .replace(/```/g, "")
     .trim();
 };
+
+/**
+ * Generate HTML email from briefing PDF using Gemini
+ */
+export const generateEmailFromPdf = async (
+  pdfBuffer: Buffer,
+  pdfMimeType: string,
+  additionalContext: string,
+  prompt: string
+) => {
+  const model = genai.getGenerativeModel({
+    model: "gemini-2.5-pro-exp-03-25",
+    generationConfig: {
+      temperature: 0.2,
+    },
+  });
+
+  // Prepare briefing PDF file for Gemini
+  const pdfFileData = {
+    inlineData: {
+      data: pdfBuffer.toString("base64"),
+      mimeType: pdfMimeType,
+    },
+  };
+
+  // Include additional context if provided
+  const contextPrompt = additionalContext
+    ? `Additional context: ${additionalContext}\n\n${prompt}`
+    : prompt;
+
+  // Get generation result
+  const result = await model.generateContent([contextPrompt, pdfFileData]);
+  let htmlContent = await result.response.text();
+
+  // Clean up response to ensure we only return clean HTML
+  return htmlContent
+    .replace(/```html/g, "")
+    .replace(/```/g, "")
+    .trim();
+};
