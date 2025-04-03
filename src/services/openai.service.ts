@@ -51,12 +51,17 @@ export const generateText = async (
 };
 
 /**
- * Generate image description from an image
+ * Generate image description from an image buffer
  */
 export const generateImageDescription = async (
   systemPrompt: string,
-  imageUrl: string
+  imageBuffer: Buffer,
+  mimeType: string
 ) => {
+  // Convert the buffer to base64
+  const base64Image = imageBuffer.toString("base64");
+  const dataUrl = `data:${mimeType};base64,${base64Image}`;
+
   const response = await openai.chat.completions.create({
     model: "gpt-4o",
     messages: [
@@ -67,7 +72,7 @@ export const generateImageDescription = async (
           {
             type: "image_url",
             image_url: {
-              url: imageUrl,
+              url: dataUrl,
             },
           },
         ],

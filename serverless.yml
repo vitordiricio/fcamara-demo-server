@@ -34,7 +34,7 @@ functions:
           method: post
           cors: true
       - http:
-          path: /get-nuflow-guideline
+          path: /get-fcamara-guideline
           method: get
           cors: true
       - http:

@@ -12,7 +12,7 @@ const router = Router();
 router.use(authenticateToken);
 
 // Get guidelines for dropdowns
-router.get("/get-adventures-guideline", getGuidelines);
+router.get("/get-fcamara-guideline", getGuidelines);
 
 // Generate copy
 router.post("/generate-copy", generateCopy);

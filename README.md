@@ -81,9 +81,11 @@ Este projeto utiliza o Serverless Framework para implantação na AWS.
 ### Pré-requisitos
 
 1. Configure as credenciais da AWS na sua máquina:
+
    ```bash
    aws configure
    ```
+
    Você precisará inserir seu ID de Chave de Acesso AWS, Chave de Acesso Secreta e região padrão.
 
 2. Certifique-se de que suas variáveis de ambiente estão definidas no arquivo `.env`.
@@ -162,9 +164,8 @@ Authorization: Bearer <seu-token-jwt>
 
 #### Geração de Cópia
 
-- **GET /get-adventures-guideline**
+- **GET /get-fcamara-guideline**
   - Resposta: Dados de diretrizes para os dropdowns do formulário
-  
 - **POST /generate-copy**
   - Corpo da Requisição: Dados do formulário incluindo marca, público-alvo e configurações de conteúdo
   - Resposta: Conteúdo de cópia gerado
@@ -174,11 +175,9 @@ Authorization: Bearer <seu-token-jwt>
 - **POST /generate-prompt-image**
   - Requisição: Dados do formulário com arquivo de imagem
   - Resposta: `{ prompt: string }` - Descrição de imagem gerada
-  
 - **POST /generate-image**
   - Corpo da Requisição: `{ prompt: string, inferenceSteps: number, guidanceScale: number, width: number, height: number }`
   - Resposta: `{ requestId: string }`
-  
 - **GET /image-status/:requestId**
   - Resposta: `{ status: string, imageUrl?: string }`
 
@@ -186,11 +185,9 @@ Authorization: Bearer <seu-token-jwt>
 
 - **GET /load-examples**
   - Resposta: Array de exemplos
-  
 - **POST /create-example**
   - Requisição: Dados do formulário com imagem, título, descrição e categoria
   - Resposta: `{ success: true }`
-  
 - **DELETE /delete-example/:id**
   - Resposta: `{ success: true }`
 
@@ -205,11 +202,13 @@ Authorization: Bearer <seu-token-jwt>
 ### Problemas Comuns
 
 1. **Falha na implantação**
+
    - Verifique se suas credenciais AWS estão configuradas corretamente
    - Certifique-se de que todas as variáveis de ambiente necessárias estão definidas
    - Verifique se o processo de compilação foi concluído com sucesso
 
 2. **Erros de compilação TypeScript**
+
    - Execute `npm run build` localmente para identificar erros de TypeScript
    - Corrija quaisquer problemas de tipo antes de tentar a implantação
 

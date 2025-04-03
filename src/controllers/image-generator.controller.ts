@@ -23,18 +23,11 @@ export const generatePromptFromImage = async (
       return;
     }
 
-    // Upload to S3
-    const s3Key = `image-to-prompt/${Date.now()}-${req.file.originalname}`;
-    const imageUrl = await uploadFile(
-      s3Key,
-      req.file.buffer,
-      req.file.mimetype
-    );
-
-    // Generate prompt using OpenAI's image understanding
+    // Generate prompt using OpenAI's image understanding directly from buffer
     const prompt = await generateImageDescription(
       imageDescriptionPrompt,
-      imageUrl
+      req.file.buffer,
+      req.file.mimetype
     );
 
     res.json({ prompt });
